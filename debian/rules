@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+export PYBUILD_DISABLE=test
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_build:
+	python3 setup.py build
+
+override_dh_auto_install:
+	python3 setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb
+	set -ex; \
+	cd debian/tmp/usr/lib/python*/*-packages/deluge/plugins/; \
+	for egg in *.egg; do \
+		mkdir -p $${egg%-py?.*}.egg; \
+		unzip $$egg -d $${egg%-py?.*}.egg; \
+		rm -f $$egg; \
+	done
+	find . -type d -name '__pycache__' | xargs rm -rf
+
+override_dh_auto_clean:
+	dh_auto_clean
+	find . -type d -name '*.egg-info' | xargs rm -rf
+	find . -type d -name '.eggs' | xargs rm -rf
+	find . -type d -wholename './deluge/plugins/*/build' | xargs rm -rf
+	rm -f deluge/data/share/applications/deluge.desktop
+
+override_dh_gencontrol:
+	dh_gencontrol -- $(SUBSTVARS)

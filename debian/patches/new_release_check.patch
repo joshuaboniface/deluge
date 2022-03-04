@@ -1,0 +1,19 @@
+Description: Disable checking for new upstream releases enabled by default
+ Users can still enable it through the preferences menus.
+Forwarded: not-needed
+Origin: vendor
+Author: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
+
+Index: deluge/deluge/core/preferencesmanager.py
+===================================================================
+--- deluge.orig/deluge/core/preferencesmanager.py	2019-08-25 12:15:43.673234687 -0400
++++ deluge/deluge/core/preferencesmanager.py	2019-08-25 12:16:35.742629247 -0400
+@@ -106,7 +106,7 @@
+     'path_chooser_accelerator_string': 'Tab',
+     'path_chooser_max_popup_rows': 20,
+     'path_chooser_show_hidden_files': False,
+-    'new_release_check': True,
++    'new_release_check': False,
+     'proxy': {
+         'type': 0,
+         'hostname': '',
