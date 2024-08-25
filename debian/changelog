@@ -1,3 +1,9 @@
+deluge (2.1.1-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Joshua Boniface <joshua@boniface.me>  Sun, 25 Aug 2024 12:21:52 -0400
+
 deluge (2.0.5-1) unstable; urgency=medium
 
   * New upstream version
